@@ -1,20 +1,18 @@
-import "../styles/globals.css";
 import { AppProps } from "next/app";
-import { useRouter } from "next/router";
-import { PAGE_CONFIG } from "config";
+import { CustomHead, NavigationHeader } from "components";
+import { StyledAppContainer } from "components/StyledComponents";
+import { GlobalStyle } from "styles";
+
+
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
-  const getPageTitle = () => {
-    const pathname = router?.pathname;
-    return PAGE_CONFIG[pathname]?.title;
-  };
-
   return (
-    <div className="app">
+    <StyledAppContainer className="app">
+      <GlobalStyle />
+      <CustomHead />
+      <NavigationHeader />
       <Component {...pageProps} />
-    </div>
+    </StyledAppContainer>
   );
 }
 

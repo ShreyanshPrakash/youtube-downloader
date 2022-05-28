@@ -11,7 +11,7 @@ const Index: FC<IndexProps> = (props: IndexProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push(APP_CONFIG?.basePagePath);
+    router.push(APP_CONFIG?.rootPath);
   }, []);
 
   return <IndexWrapper></IndexWrapper>;
