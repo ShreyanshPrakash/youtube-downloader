@@ -5,6 +5,6 @@ interface StyledTextProps {
   readonly fontsize?: string;
 }
 export const StyledText = styled.p<StyledTextProps>`
-  color: ${(props) => props?.color || "inherit"};
-  font-size: ${(props) => props?.fontsize || "inherit"};
+  color: ${(props) => props?.color || "black"};
+  font-size: ${(props) => props?.fontsize || "14px"};
 `;

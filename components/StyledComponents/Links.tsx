@@ -6,5 +6,5 @@ interface StyledNavLinkProps {
 export const StyledNavLink = styled.div<StyledNavLinkProps>`
   margin: 4px 8px;
   font-size: 18px;
-  color: ${(props) => props?.color || "inherit"};
+  color: ${(props) => props?.color || "black"};
 `;
