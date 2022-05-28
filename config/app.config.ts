@@ -1,3 +1,15 @@
+const HEADER_NAV_CONFIG = [
+  {
+    label: "Download",
+    link: "/download",
+  },
+  {
+    label: "Help",
+    link: "/help",
+  },
+];
+
 export const APP_CONFIG = {
-    basePagePath: "/home",
-}
+  rootPath: "/home",
+  HEADER_NAV_CONFIG,
+};
