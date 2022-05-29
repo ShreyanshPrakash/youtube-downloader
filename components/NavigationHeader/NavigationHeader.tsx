@@ -30,7 +30,7 @@ export const NavigationHeader: FC<{}> = () => {
         {APP_CONFIG?.HEADER_NAV_CONFIG.map((item) => {
           const { label, link } = item;
           return (
-            <StyledNavLink color="white">
+            <StyledNavLink key={label} color="white">
               <Link key={label} href={link}>
                 <a>{label}</a>
               </Link>

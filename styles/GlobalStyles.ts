@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    height: 100%;
   }
 
   a {
@@ -16,5 +17,10 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+  }
+
+  // Making nextjs container to take the whole page height
+  #__next {
+    height: 100%;
   }
 `;
