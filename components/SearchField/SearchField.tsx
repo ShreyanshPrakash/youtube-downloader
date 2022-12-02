@@ -4,6 +4,7 @@ import styled from "styled-components";
 interface SearchFieldWrapperProps {
   readonly fullWidth?: boolean;
   readonly width?: string;
+  styles?: any;
 }
 const SearchFieldWrapper = styled.div<SearchFieldWrapperProps>`
   .search-field {
@@ -15,6 +16,7 @@ const SearchFieldWrapper = styled.div<SearchFieldWrapperProps>`
     border-radius: 20px;
     border: 1px solid grey;
     font-size: ${({ theme }) => theme?.fontSizes?.default};
+    ${props => ({...props?.styles})}
 
     &::placeholder {
       font-size: 18px;
@@ -25,21 +27,30 @@ const SearchFieldWrapper = styled.div<SearchFieldWrapperProps>`
 interface SearchFieldProps extends SearchFieldWrapperProps {
   onChange?: (
     event: ChangeEvent<HTMLInputElement>
-  ) => ChangeEvent<HTMLInputElement>;
+  ) => void;
   type?: string;
   name?: string;
+  ref?: any;
 }
-export const SearchField: FC<SearchFieldProps> = (props) => {
-  const { type = "text", onChange, name } = props;
-  return (
-    <SearchFieldWrapper {...props}>
-      <input
-        className="search-field"
-        placeholder="Enter video link"
-        name={name || "input-field"}
-        type={type}
-        onChange={onChange}
-      />
-    </SearchFieldWrapper>
-  );
-};
+export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
+  (props: SearchFieldProps, ref) => {
+    const { type = "text", onChange, name } = props;
+
+    console.log("SearchBar");
+    return (
+      <SearchFieldWrapper {...props}>
+        <input
+          className="search-field"
+          placeholder="Enter video link"
+          name={name || "input-field"}
+          type={type}
+          ref={ref}
+          onChange={onChange}
+          autoComplete="off"
+        />
+      </SearchFieldWrapper>
+    );
+  }
+);
+
+export const InputField = SearchField;
