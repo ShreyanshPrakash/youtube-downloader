@@ -1,4 +1,4 @@
-import { StyledContainer, StyledNavLink } from "components/StyledComponents";
+import { StyledContainer, StyledNavLink } from "uiLibrary/StyledComponents";
 import { APP_CONFIG } from "config";
 import Link from "next/link";
 import React, { FC } from "react";

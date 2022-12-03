@@ -1,4 +1,4 @@
-import { useAppSelector } from "hooks/storeHooks";
+import { useAppSelector } from "hooks";
 import React, { FC } from "react";
 import { getDownloadQueue } from "store/slices";
 import styled from "styled-components";
