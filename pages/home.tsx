@@ -1,10 +1,7 @@
 import React, { ChangeEvent, FC, FormEvent, useRef, MouseEvent, useEffect, useState } from "react";
 import { ActiveDownloads, Button, Form, SearchField } from "components";
-import { Divider, StyledContainer } from "components/StyledComponents";
-import { ENDPOINTS } from "config/endpoint.config";
-import { httpsService } from "service";
+import { StyledContainer } from "components/StyledComponents";
 import styled, { useTheme } from "styled-components";
-// import { useSelector, useDispatch } from 'react-redux';
 import { downloadSelectedVideo, selectURL, testStore } from "store/slices";
 import { RootState } from "store";
 import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
@@ -51,26 +48,9 @@ const Home: FC<IHomeProps> = () => {
     const url = searchValue;
 
     console.log(url);
-    dispatch(testStore(url));
-    dispatch(downloadSelectedVideo(url));
-    // downlodVideo(payload);
+    // dispatch(testStore(url));
+    // dispatch(downloadSelectedVideo(url));
   };
-
-  // const downlodVideo = (body: any) => {
-    // const url = ENDPOINTS?.downloadVideo;
-  //   httpsService
-  //     .post(url, body)
-  //     .then((res) => {
-  //       console.log(res?.data);
-  //       console.log(res.data?.description);
-  //       console.log(res?.data?.formats[res?.data?.formats.length - 8]?.url);
-  //       // console.log(res?.data?.split?.("\n"));
-  //       return res;
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   return (
     <HomeWrapper>
@@ -80,7 +60,6 @@ const Home: FC<IHomeProps> = () => {
             type="search"
             name="videoLink"
             width={theme?.formFieldSizes?.sizeXL}
-            // ref={inputRef}
             styles={{
               borderRadius: "4px",
             }}
@@ -92,6 +71,7 @@ const Home: FC<IHomeProps> = () => {
             disabled={!searchValue}
             styles={{
               borderRadius: "8px",
+              marginLeft: "16px",
             }}
           />
           {/* <Button label="Download" onClick={handleDownloadClick}/> */}

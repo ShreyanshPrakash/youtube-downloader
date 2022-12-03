@@ -1,7 +1,7 @@
-import { DownloadVideoSlice, APICallSlice } from '.';
+import { DownloadSlice, APICallSlice } from '.';
 
 
 export const reducer = {
-    downloadVideoState: DownloadVideoSlice?.reducer,
+    downloadVideoState: DownloadSlice?.reducer,
     apiCallState: APICallSlice?.reducer
 }

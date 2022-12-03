@@ -36,7 +36,6 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
   (props: SearchFieldProps, ref) => {
     const { type = "text", onChange, name } = props;
 
-    console.log("SearchBar");
     return (
       <SearchFieldWrapper {...props}>
         <input

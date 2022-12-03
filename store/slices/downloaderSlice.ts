@@ -25,21 +25,29 @@ const intialState: InitialState = {
 /*
     Async Actions
 */
-export const downloadSelectedVideo = createAsyncThunk
-// <
-// AsyncThunkAction<any, any, any>
-// >
-("downloadVideo/downloadSelectedVideo", async (payload: string) => {
+export const downloadVideo = createAsyncThunk(
+  "download/downloadVideo",
+  async (payload: string) => {
     const endpoint = ENDPOINTS?.downloadVideo;
-  const response = await httpsService.post<String, any>(
-    endpoint,
-    {
-        videoLink: payload
-    }
-  );
+    const response = await httpsService.post<String, any>(endpoint, {
+      videoLink: payload,
+    });
 
-  return response.data;
-});
+    return response.data;
+  }
+);
+
+export const fetchVideoDetails = createAsyncThunk(
+  "download/fetchVideoDetails",
+  async (payload: string) => {
+    const endpoint = ENDPOINTS?.downloadVideo;
+    const response = await httpsService.post<String, any>(endpoint, {
+      videoLink: payload,
+    });
+
+    return response.data;
+  }
+);
 
 /*
  */
@@ -73,19 +81,19 @@ const reducers = {
 const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
   builder
     .addCase(
-      downloadSelectedVideo?.pending,
+      downloadVideo?.pending,
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
       }
     )
     .addCase(
-      downloadSelectedVideo?.fulfilled,
+      downloadVideo?.fulfilled,
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = action.payload;
       }
     )
     .addCase(
-      downloadSelectedVideo?.rejected,
+      downloadVideo?.rejected,
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
       }
@@ -105,8 +113,8 @@ export const selectURL = (state: RootState) => state.downloadVideoState.url;
 /*
     Splice
 */
-export const DownloadVideoSlice = createSlice({
-  name: "downloadVideo",
+export const DownloadSlice = createSlice({
+  name: "download",
   initialState: intialState,
   reducers: reducers,
   extraReducers: extraReducers,
@@ -118,4 +126,4 @@ export const {
   downloadApiSuccesful,
   downloadApiFailed,
   testStore,
-} = DownloadVideoSlice.actions;
+} = DownloadSlice.actions;
