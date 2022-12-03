@@ -3,11 +3,11 @@ import {
   createAsyncThunk,
   PayloadAction,
   ActionReducerMapBuilder,
-  AsyncThunkAction,
 } from "@reduxjs/toolkit";
 import { ENDPOINTS } from "config/endpoint.config";
 import { httpsService } from "service";
 import { RootState } from "store/store";
+
 
 /*
     Initial State
@@ -15,12 +15,16 @@ import { RootState } from "store/store";
 interface InitialState {
   url: String;
   data: any;
+  downloadQueue: Array<string>;
 }
 
 const intialState: InitialState = {
   url: "",
   data: {},
+  downloadQueue: [],
 };
+
+
 
 /*
     Async Actions
@@ -57,17 +61,14 @@ export const fetchVideoDetails = createAsyncThunk(
 */
 
 const reducers = {
-  downloadApiInProgress: (state: InitialState, action: PayloadAction<any>) => {
-    return state;
+  addToDownloadQueue: (state: InitialState, action: PayloadAction<any>) => {
+    state.downloadQueue.push(action.payload);
   },
   downloadApiSuccesful: (state: InitialState, action: PayloadAction<any>) => {
-    return state;
+    state;
   },
   downloadApiFailed: (state: InitialState, action: PayloadAction<any>) => {
-    return state;
-  },
-  testStore: (state: InitialState, action: PayloadAction<any>) => {
-    state.url = action.payload;
+    state;
   },
 };
 
@@ -106,7 +107,9 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
 /*
     Selectors
 */
-export const selectURL = (state: RootState) => state.downloadVideoState.url;
+// export const selectURL = (state: RootState) => state.downloadVideoState.url;
+export const getDownloadQueue = (state: RootState) =>
+  state.downloadVideoState.downloadQueue;
 /*
  */
 
@@ -121,9 +124,5 @@ export const DownloadSlice = createSlice({
 });
 
 // Exporting all actions
-export const {
-  downloadApiInProgress,
-  downloadApiSuccesful,
-  downloadApiFailed,
-  testStore,
-} = DownloadSlice.actions;
+export const { addToDownloadQueue, downloadApiSuccesful, downloadApiFailed } =
+  DownloadSlice.actions;

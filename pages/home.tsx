@@ -1,10 +1,17 @@
-import React, { ChangeEvent, FC, FormEvent, useRef, MouseEvent, useEffect, useState } from "react";
-import { ActiveDownloads, Button, Form, SearchField } from "components";
+import React, {
+  ChangeEvent,
+  FC,
+  MouseEvent,
+  ReactElement,
+  useState,
+} from "react";
+import { ActiveDownloads, Button, SearchField } from "components";
 import { StyledContainer } from "components/StyledComponents";
 import styled, { useTheme } from "styled-components";
-import { downloadSelectedVideo, selectURL, testStore } from "store/slices";
-import { RootState } from "store";
-import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
+import { addToDownloadQueue } from "store/slices";
+import { useAppDispatch } from "hooks/storeHooks";
+import { isValidVideoUrl } from "utils";
+import { SearchStateModel } from "models";
 
 const HomeWrapper = styled.div`
   padding: 24px;
@@ -27,29 +34,30 @@ const HomeWrapper = styled.div`
 
 interface IHomeProps {}
 
-const Home: FC<IHomeProps> = () => {
-
-  const [searchValue, setSearchValue] = useState<string>("");
+const Home: FC<IHomeProps> = (): ReactElement => {
+  const [searchFieldState, setSearchFieldState] = useState<SearchStateModel>(
+    new SearchStateModel()
+  );
 
   const theme = useTheme();
 
-  const downloadVideoState = useAppSelector(selectURL);
   const dispatch = useAppDispatch();
 
-  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event?.stopPropagation();
-    setSearchValue(event?.target?.value || "");
-  }
+    const value = event?.target?.value;
+    setSearchFieldState({
+      searchValue: value,
+      isValidValue: isValidVideoUrl(value),
+    });
+  };
 
   const handleDownloadClick = (
     event: MouseEvent<HTMLButtonElement> | undefined
-  ) => {
+  ): void => {
     event?.preventDefault?.();
-    const url = searchValue;
-
-    console.log(url);
-    // dispatch(testStore(url));
-    // dispatch(downloadSelectedVideo(url));
+    dispatch(addToDownloadQueue(searchFieldState?.searchValue));
+    setSearchFieldState(new SearchStateModel());
   };
 
   return (
@@ -63,18 +71,18 @@ const Home: FC<IHomeProps> = () => {
             styles={{
               borderRadius: "4px",
             }}
+            value={searchFieldState?.searchValue}
             onChange={handleSearchChange}
           />
           <Button
             label="Download"
             onClick={handleDownloadClick}
-            disabled={!searchValue}
+            disabled={!searchFieldState?.isValidValue}
             styles={{
               borderRadius: "8px",
               marginLeft: "16px",
             }}
           />
-          {/* <Button label="Download" onClick={handleDownloadClick}/> */}
         </StyledContainer>
       </StyledContainer>
       <ActiveDownloads />
