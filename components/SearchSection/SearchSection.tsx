@@ -7,7 +7,7 @@ import React, {
   ReactElement,
   useState,
 } from "react";
-import { addToDownloadQueue, getDownloadQueue } from "store/slices";
+import { addToDownloadQueue, downloadVideo, fetchVideoDetails, getDownloadQueue } from "store/slices";
 import styled, { useTheme } from "styled-components";
 import { Button, SearchField, StyledContainer } from "uiLibrary";
 import { isValidVideoUrl } from "utils";
@@ -15,8 +15,9 @@ import { isValidVideoUrl } from "utils";
 interface Iprops {}
 
 const SearchSectionWrapper = styled.div`
-  .download-section {
-    width: 60%;
+margin-bottom: 24px;
+  .search-section {
+    /* width: 60%; */
     margin: auto;
     padding: 24px 0px;
     display: flex;
@@ -53,12 +54,14 @@ export const SearchSection: FC<Iprops> = (props: Iprops): ReactElement => {
   ): void => {
     event?.preventDefault?.();
     dispatch(addToDownloadQueue(searchFieldState?.searchValue));
+    // dispatch(downloadVideo(searchFieldState?.searchValue));
+    dispatch(fetchVideoDetails(searchFieldState?.searchValue));
     setSearchFieldState(new SearchStateModel());
   };
 
   return (
     <SearchSectionWrapper>
-      <StyledContainer className="download-section">
+      <StyledContainer className="search-section">
         <StyledContainer className="search-container" display="flex">
           <SearchField
             type="search"

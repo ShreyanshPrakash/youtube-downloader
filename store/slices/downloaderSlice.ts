@@ -12,17 +12,36 @@ import { RootState } from "store/store";
 /*
     Initial State
 */
+
+class VideoMapModel{
+  userUrl: string;
+  urlInfoReponse: Object;
+  constructor(url: string){
+    this.userUrl = url || "";
+    this.urlInfoReponse = {};
+  }
+}
+
+interface SupportedPlatforms {
+  [key: string]: VideoMapModel;
+}
+
+
 interface InitialState {
   url: String;
   data: any;
   downloadQueue: Array<string>;
+  videoMap: SupportedPlatforms;
 }
 
 const intialState: InitialState = {
   url: "",
   data: {},
   downloadQueue: [],
+  videoMap: {},
 };
+
+
 
 
 
@@ -44,7 +63,7 @@ export const downloadVideo = createAsyncThunk(
 export const fetchVideoDetails = createAsyncThunk(
   "download/fetchVideoDetails",
   async (payload: string) => {
-    const endpoint = ENDPOINTS?.downloadVideo;
+    const endpoint = ENDPOINTS?.getVideoInfo;
     const response = await httpsService.post<String, any>(endpoint, {
       videoLink: payload,
     });
@@ -61,8 +80,9 @@ export const fetchVideoDetails = createAsyncThunk(
 */
 
 const reducers = {
-  addToDownloadQueue: (state: InitialState, action: PayloadAction<any>) => {
+  addToDownloadQueue: (state: InitialState, action: PayloadAction<string>) => {
     state.downloadQueue.push(action.payload);
+    state.videoMap[action.payload] = new VideoMapModel(action.payload);
   },
   downloadApiSuccesful: (state: InitialState, action: PayloadAction<any>) => {
     state;
@@ -98,7 +118,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
       }
-    );
+    )
 };
 
 /*
