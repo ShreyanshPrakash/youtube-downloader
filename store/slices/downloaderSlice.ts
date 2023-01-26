@@ -67,7 +67,7 @@ export const fetchVideoDetails = createAsyncThunk(
     const response = await httpsService.post<String, any>(endpoint, {
       videoLink: payload,
     });
-
+    console.log(response);
     return response.data;
   }
 );
@@ -81,7 +81,7 @@ export const fetchVideoDetails = createAsyncThunk(
 
 const reducers = {
   addToDownloadQueue: (state: InitialState, action: PayloadAction<string>) => {
-    state.downloadQueue.push(action.payload);
+    state.downloadQueue.unshift(action.payload);
     state.videoMap[action.payload] = new VideoMapModel(action.payload);
   },
   downloadApiSuccesful: (state: InitialState, action: PayloadAction<any>) => {

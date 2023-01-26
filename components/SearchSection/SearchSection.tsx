@@ -54,8 +54,8 @@ export const SearchSection: FC<Iprops> = (props: Iprops): ReactElement => {
   ): void => {
     event?.preventDefault?.();
     dispatch(addToDownloadQueue(searchFieldState?.searchValue));
-    // dispatch(downloadVideo(searchFieldState?.searchValue));
-    dispatch(fetchVideoDetails(searchFieldState?.searchValue));
+    dispatch(downloadVideo(searchFieldState?.searchValue));
+    // dispatch(fetchVideoDetails(searchFieldState?.searchValue));
     setSearchFieldState(new SearchStateModel());
   };
 
