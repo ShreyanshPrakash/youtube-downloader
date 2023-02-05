@@ -22,7 +22,7 @@ export const NavigationHeader: FC<{}> = () => {
       <StyledContainer>
         <StyledNavLink color="white">
           <Link href={APP_CONFIG?.rootPath}>
-            <a>youtube downloader</a>
+            youtube downloader
           </Link>
         </StyledNavLink>
       </StyledContainer>
@@ -32,7 +32,7 @@ export const NavigationHeader: FC<{}> = () => {
           return (
             <StyledNavLink key={label} color="white">
               <Link key={label} href={link}>
-                <a>{label}</a>
+                {label}
               </Link>
             </StyledNavLink>
           );
