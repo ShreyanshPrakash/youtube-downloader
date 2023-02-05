@@ -4,6 +4,7 @@ import { reducer } from 'store/slices';
 export const store = configureStore({
     reducer: reducer,
     devTools: true,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 // infer types based on the state and dispatch

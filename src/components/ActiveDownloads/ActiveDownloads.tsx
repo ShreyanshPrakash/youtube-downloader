@@ -1,8 +1,8 @@
 import { useAppSelector } from "hooks";
 import React, { FC } from "react";
-import { getDownloadQueue } from "store/slices";
+import { getDownloadQueue, getVideoMap } from "store/slices";
 import styled from "styled-components";
-import { DownloadCard } from "uiLibrary";
+import { VideoCard } from "uiLibrary";
 
 
 interface Iprops{}
@@ -17,13 +17,15 @@ const ActiveDownloadsWrapper = styled.div`
 export const ActiveDownloads: FC<Iprops> = (props: Iprops) => {
 
   const downloadQueue = useAppSelector(getDownloadQueue);
+  const videoMap = useAppSelector(getVideoMap);
 
     return (<ActiveDownloadsWrapper>
         {
           downloadQueue.map(item => {
 
-            return <DownloadCard 
+            return <VideoCard key={item}
               title={item}
+              videoDetails={videoMap[item]}
             />
           })
         }

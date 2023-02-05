@@ -1,7 +1,7 @@
 import { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 
-const DownloadCardWrapper = styled.div`
+const VideoCardWrapper = styled.div`
     border: 1px solid black;
     width: 240px;
     padding: 16px;
@@ -18,17 +18,22 @@ const DownloadCardWrapper = styled.div`
     }
 `;
 
+interface VideoDetails {
+
+}
+
 interface IProps {
     imageSrc?: string;
     imageAltText?: string;
     title?: string;
     videoUrl?: string;
+    videoDetails: VideoDetails;
 }
 
-export const DownloadCard: FC<IProps> = (props: IProps): ReactElement => {
+export const VideoCard: FC<IProps> = (props: IProps): ReactElement => {
     const { imageSrc, imageAltText, title, } = props;
     return(
-        <DownloadCardWrapper>
+        <VideoCardWrapper>
             <div className='image-section'>
                 <img src={imageSrc} alt={imageAltText} />
             </div>
@@ -41,6 +46,6 @@ export const DownloadCard: FC<IProps> = (props: IProps): ReactElement => {
             <div className='action-section'>
                 buttons
             </div>
-        </DownloadCardWrapper>
+        </VideoCardWrapper>
     )
 }
