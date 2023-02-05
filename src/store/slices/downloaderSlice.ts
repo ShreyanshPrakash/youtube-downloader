@@ -8,24 +8,22 @@ import { ENDPOINTS } from "config/endpoint.config";
 import { httpsService } from "service";
 import { RootState } from "store/store";
 
-
 /*
     Initial State
 */
 
-class VideoMapModel{
+class VideoMapModel {
   userUrl: string;
-  urlInfoReponse: Object;
-  constructor(url: string){
+  videoDetails: {};
+  constructor(url: string) {
     this.userUrl = url || "";
-    this.urlInfoReponse = {};
+    this.videoDetails = {};
   }
 }
 
 interface SupportedPlatforms {
   [key: string]: VideoMapModel;
 }
-
 
 interface InitialState {
   url: String;
@@ -40,10 +38,6 @@ const intialState: InitialState = {
   downloadQueue: [],
   videoMap: {},
 };
-
-
-
-
 
 /*
     Async Actions
@@ -67,7 +61,6 @@ export const fetchVideoDetails = createAsyncThunk(
     const response = await httpsService.post<String, any>(endpoint, {
       videoLink: payload,
     });
-    console.log(response);
     return response.data;
   }
 );
@@ -81,8 +74,11 @@ export const fetchVideoDetails = createAsyncThunk(
 
 const reducers = {
   addToDownloadQueue: (state: InitialState, action: PayloadAction<string>) => {
-    state.downloadQueue.unshift(action.payload);
-    state.videoMap[action.payload] = new VideoMapModel(action.payload);
+    const { payload } = action;
+    state.downloadQueue.unshift(payload);
+    state.videoMap[String(payload)] = {
+      ...new VideoMapModel(payload)
+    };
   },
   downloadApiSuccesful: (state: InitialState, action: PayloadAction<any>) => {
     state;
@@ -118,7 +114,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
       }
-    )
+    );
 };
 
 /*
@@ -127,9 +123,11 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
 /*
     Selectors
 */
-// export const selectURL = (state: RootState) => state.downloadVideoState.url;
 export const getDownloadQueue = (state: RootState) =>
   state.downloadVideoState.downloadQueue;
+
+  export const getVideoMap = (state: RootState) =>
+  state.downloadVideoState.videoMap;
 /*
  */
 

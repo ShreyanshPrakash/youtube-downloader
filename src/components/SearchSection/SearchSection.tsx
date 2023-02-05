@@ -7,7 +7,10 @@ import React, {
   ReactElement,
   useState,
 } from "react";
-import { addToDownloadQueue, downloadVideo, fetchVideoDetails, getDownloadQueue } from "store/slices";
+import {
+  addToDownloadQueue,
+  getDownloadQueue,
+} from "store/slices";
 import styled, { useTheme } from "styled-components";
 import { Button, SearchField, StyledContainer } from "uiLibrary";
 import { isValidVideoUrl } from "utils";
@@ -15,7 +18,7 @@ import { isValidVideoUrl } from "utils";
 interface Iprops {}
 
 const SearchSectionWrapper = styled.div`
-margin-bottom: 24px;
+  margin-bottom: 24px;
   .search-section {
     /* width: 60%; */
     margin: auto;
