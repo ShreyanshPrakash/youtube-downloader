@@ -12,6 +12,7 @@ const colors = {
   ytdGrey: "#e6dddd",
   greenLight: "#1ed21e",
   blueMedium: "#3333fc",
+  blueHMedium: "#5353d7",
 };
 
 const fontSizes: ISizes = {
