@@ -1,11 +1,10 @@
+import { VideoCard } from "components/VideoCard";
 import { useAppSelector } from "hooks";
 import React, { FC } from "react";
-import { getDownloadQueue, getVideoMap } from "store/slices";
+import { getDownloadQueue } from "store/slices";
 import styled from "styled-components";
-import { VideoCard } from "uiLibrary";
 
-
-interface Iprops{}
+interface Iprops {}
 
 const ActiveDownloadsWrapper = styled.div`
   display: flex;
@@ -15,20 +14,13 @@ const ActiveDownloadsWrapper = styled.div`
 `;
 
 export const ActiveDownloads: FC<Iprops> = (props: Iprops) => {
-
   const downloadQueue = useAppSelector(getDownloadQueue);
-  const videoMap = useAppSelector(getVideoMap);
 
-    return (<ActiveDownloadsWrapper>
-        {
-          downloadQueue.map(item => {
-
-            return <VideoCard key={item}
-              title={item}
-              videoDetails={videoMap[item]}
-            />
-          })
-        }
-        
-    </ActiveDownloadsWrapper>)
-}
+  return (
+    <ActiveDownloadsWrapper>
+      {downloadQueue.map((url: string, index: number) => {
+        return <VideoCard key={url} url={url} index={index}/>;
+      })}
+    </ActiveDownloadsWrapper>
+  );
+};

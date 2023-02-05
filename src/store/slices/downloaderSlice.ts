@@ -12,24 +12,24 @@ import { RootState } from "store/store";
     Initial State
 */
 
-class VideoMapModel {
-  userUrl: string;
-  videoDetails: {};
-  constructor(url: string) {
-    this.userUrl = url || "";
-    this.videoDetails = {};
-  }
-}
+// class VideoMapModel {
+//   userUrl: string;
+//   videoDetails: {};
+//   constructor(url: string) {
+//     this.userUrl = url || "";
+//     this.videoDetails = {};
+//   }
+// }
 
-interface SupportedPlatforms {
-  [key: string]: VideoMapModel;
+interface VideoMap {
+  [key: string]: any;
 }
 
 interface InitialState {
   url: String;
   data: any;
   downloadQueue: Array<string>;
-  videoMap: SupportedPlatforms;
+  videoMap: VideoMap;
 }
 
 const intialState: InitialState = {
@@ -76,9 +76,9 @@ const reducers = {
   addToDownloadQueue: (state: InitialState, action: PayloadAction<string>) => {
     const { payload } = action;
     state.downloadQueue.unshift(payload);
-    state.videoMap[String(payload)] = {
-      ...new VideoMapModel(payload)
-    };
+    // state.videoMap[String(payload)] = {
+    //   ...new VideoMapModel(payload)
+    // };
   },
   downloadApiSuccesful: (state: InitialState, action: PayloadAction<any>) => {
     state;
@@ -114,7 +114,25 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
       }
-    );
+    ).addCase(
+      fetchVideoDetails?.pending,
+      (state: InitialState, action: PayloadAction<any>) => {
+        state.data = {};
+      }
+    )
+    .addCase(
+      fetchVideoDetails?.fulfilled,
+      (state: InitialState, action: PayloadAction<any>) => {
+        const { meta, payload } = action;
+        state.videoMap[meta?.arg] = payload;
+      }
+    )
+    .addCase(
+      fetchVideoDetails?.rejected,
+      (state: InitialState, action: PayloadAction<any>) => {
+        state.data = {};
+      }
+    )
 };
 
 /*
@@ -128,6 +146,8 @@ export const getDownloadQueue = (state: RootState) =>
 
   export const getVideoMap = (state: RootState) =>
   state.downloadVideoState.videoMap;
+
+  
 /*
  */
 

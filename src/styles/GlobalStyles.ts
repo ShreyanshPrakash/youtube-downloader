@@ -23,4 +23,8 @@ export const GlobalStyle = createGlobalStyle`
   #__next {
     height: 100%;
   }
+
+  .box-shadow-light-gray {
+    box-shadow: 2px 2px 20px 1px lightgray;
+  }
 `;
