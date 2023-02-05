@@ -18,8 +18,6 @@ export const ActiveDownloads: FC<Iprops> = (props: Iprops) => {
 
   const downloadQueue = useAppSelector(getDownloadQueue);
 
-  console.log(downloadQueue);
-
     return (<ActiveDownloadsWrapper>
         {
           downloadQueue.map(item => {
