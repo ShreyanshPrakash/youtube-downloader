@@ -1,4 +1,4 @@
-import { StyledContainer, StyledNavLink } from "components/StyledComponents";
+import { StyledContainer, StyledNavLink } from "uiLibrary/StyledComponents";
 import { APP_CONFIG } from "config";
 import Link from "next/link";
 import React, { FC } from "react";
@@ -22,7 +22,7 @@ export const NavigationHeader: FC<{}> = () => {
       <StyledContainer>
         <StyledNavLink color="white">
           <Link href={APP_CONFIG?.rootPath}>
-            <a>youtube downloader</a>
+            youtube downloader
           </Link>
         </StyledNavLink>
       </StyledContainer>
@@ -32,7 +32,7 @@ export const NavigationHeader: FC<{}> = () => {
           return (
             <StyledNavLink key={label} color="white">
               <Link key={label} href={link}>
-                <a>{label}</a>
+                {label}
               </Link>
             </StyledNavLink>
           );

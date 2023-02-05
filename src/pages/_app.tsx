@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
-import { CustomHead, NavigationHeader } from "components";
-import { StyledAppContainer } from "components/StyledComponents";
+import { CustomHead, NavigationHeader } from "uiLibrary";
+import { StyledAppContainer } from "uiLibrary/StyledComponents";
 import { GlobalStyle, YTDTheme } from "styles";
 import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
