@@ -7,9 +7,10 @@ interface IButtonWrapperProps {
   styles?: any;
 }
 const ButtonWrapper = styled.button<IButtonWrapperProps>`
+  cursor: pointer;
   padding: 10px 24px;
   border-radius: 24px;
-  background-color: ${({ theme }) => theme?.colors?.blueMedium};
+  background-color: ${({ theme }) => theme?.colors?.blueHMedium};
   color: white;
   border: 1px solid ${({ theme }) => theme?.colors?.ytdGrey};
   font-size: ${({ theme }) => theme?.fontSizes?.default};
