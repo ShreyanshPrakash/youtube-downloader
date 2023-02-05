@@ -8,11 +8,7 @@ import React, {
   ReactElement,
   useState,
 } from "react";
-import {
-  addToDownloadQueue,
-  getDownloadQueue,
-  getVideoMap,
-} from "store/slices";
+import { addToDownloadQueue, getVideoMap } from "store/slices";
 import styled, { useTheme } from "styled-components";
 import { Button, SearchField, StyledContainer } from "uiLibrary";
 import { isValidVideoUrl } from "utils";
@@ -32,7 +28,6 @@ export const SearchSection: FC<Iprops> = (props: Iprops): ReactElement => {
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event?.stopPropagation();
     const value = event?.target?.value;
-    console.log(videoMap[value] !== undefined);
     setSearchFieldState({
       searchValue: value,
       isValidValue: isValidVideoUrl(value),
@@ -58,7 +53,10 @@ export const SearchSection: FC<Iprops> = (props: Iprops): ReactElement => {
   return (
     <SearchSectionWrapper>
       <StyledContainer className="search-section">
-        <StyledContainer className="search-container" display="flex">
+        <StyledContainer
+          className="search-container box-shadow-light-gray"
+          display="flex"
+        >
           <div className="search-input-field-container">
             <SearchField
               type="search"
@@ -71,10 +69,8 @@ export const SearchSection: FC<Iprops> = (props: Iprops): ReactElement => {
               onChange={handleSearchChange}
             />
             <p className="helper-text">
-              {
-                searchFieldState.isDuplicate && 
-                "Video with same link already exist in the queue!"
-              }
+              {searchFieldState.isDuplicate &&
+                "Video with same link already exist in the queue!"}
             </p>
           </div>
           <Button

@@ -7,6 +7,7 @@ export const StyledAppContainer = styled.div`
 
 interface StyledContainerProps {
   readonly display?: string;
+  readonly className?: string;
 }
 export const StyledContainer = styled.div<StyledContainerProps>`
   align-items: center;

@@ -9,9 +9,10 @@ margin-bottom: 24px;
   display: flex;
 
   .search-container {
-    border: 4px solid ${({ theme }) => theme?.colors?.greenLight};
+    /* border: 4px solid ${({ theme }) => theme?.colors?.greenLight}; */
     padding: 24px;
     margin: auto;
+    border-radius: 10px;
 
     display: flex;
     align-items: flex-start;
