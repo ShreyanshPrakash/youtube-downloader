@@ -50,9 +50,9 @@ export const VideoCard: FC<IProps> = (props: IProps): ReactElement => {
         continue;
       }
       if (width && height) {
-        videoFormats.push(item);
+        videoFormats.unshift(item);
       } else {
-        audioFormats.push(item);
+        audioFormats.unshift(item);
       }
     }
 
@@ -92,9 +92,9 @@ export const VideoCard: FC<IProps> = (props: IProps): ReactElement => {
                   </option>
                   {downlodOptions.videoOptions.map(
                     (option: any, index: number) => {
-                      const { video_ext, url, resolution } = option;
+                      const { video_ext, url, resolution, width } = option;
                       return (
-                        <option key={index} value={video_ext}>
+                        <option key={index} value={String(width)}>
                           {`${resolution} : ${video_ext}`}
                         </option>
                       );

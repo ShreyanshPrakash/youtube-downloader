@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const VideoCardWrapper = styled.div`
   border-radius: 10px;
   width: 240px;
-  padding: 16px;
+  padding: 8px;
+  border: 2px solid darkblue;
 
   .image-section {
     min-height: 80px;
@@ -39,7 +40,7 @@ export const VideoCardWrapper = styled.div`
   }
 
   .select-field-container {
-    width: 120px;
+    width: 140px;
   }
 
   .select-field {
