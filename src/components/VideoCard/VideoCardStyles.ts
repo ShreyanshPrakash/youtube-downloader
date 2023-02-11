@@ -11,6 +11,7 @@ export const VideoCardWrapper = styled.div`
 
     img {
       width: 100%;
+      word-break: break-word;
     }
   }
 
