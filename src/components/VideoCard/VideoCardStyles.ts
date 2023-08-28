@@ -30,10 +30,16 @@ export const VideoCardWrapper = styled.div`
     margin: auto;
   }
 
-  .download-option-section {
-    font-size: 14px;
+  .action-button-section {
     margin: 8px 0px;
+    margin-bottom: 0px;
+    text-align: right;
   }
+`;
+
+export const DownloadOptionSectionStyled = styled.div`
+  font-size: 14px;
+  margin: 8px 0px;
 
   .options-container {
     display: flex;
@@ -46,11 +52,5 @@ export const VideoCardWrapper = styled.div`
 
   .select-field {
     width: 100%;
-  }
-
-  .action-button-section {
-    margin: 8px 0px;
-    margin-bottom: 0px;
-    text-align: right;
   }
 `;

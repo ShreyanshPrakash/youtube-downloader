@@ -25,11 +25,16 @@ interface VideoMap {
   [key: string]: any;
 }
 
+interface DownloadInfoMap {
+  [key: string]: any;
+}
+
 interface InitialState {
   url: String;
   data: any;
   downloadQueue: Array<string>;
   videoMap: VideoMap;
+  downloadInfoMap: DownloadInfoMap;
 }
 
 const intialState: InitialState = {
@@ -37,6 +42,7 @@ const intialState: InitialState = {
   data: {},
   downloadQueue: [],
   videoMap: {},
+  downloadInfoMap: {},
 };
 
 /*
@@ -49,7 +55,6 @@ export const downloadVideo = createAsyncThunk(
     const response = await httpsService.post<String, any>(endpoint, {
       videoLink: payload,
     });
-
     return response.data;
   }
 );
@@ -107,6 +112,8 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
       downloadVideo?.fulfilled,
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = action.payload;
+        const { meta, payload } = action;
+        state.downloadInfoMap[meta?.arg] = payload;
       }
     )
     .addCase(
@@ -114,7 +121,8 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
       }
-    ).addCase(
+    )
+    .addCase(
       fetchVideoDetails?.pending,
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
@@ -132,7 +140,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
       (state: InitialState, action: PayloadAction<any>) => {
         state.data = {};
       }
-    )
+    );
 };
 
 /*
@@ -144,10 +152,12 @@ const extraReducers = (builder: ActionReducerMapBuilder<InitialState>) => {
 export const getDownloadQueue = (state: RootState) =>
   state.downloadVideoState.downloadQueue;
 
-  export const getVideoMap = (state: RootState) =>
+export const getVideoMap = (state: RootState) =>
   state.downloadVideoState.videoMap;
 
-  
+export const getDownloadInfoMap = (state: RootState) =>
+  state.downloadVideoState.downloadInfoMap;
+
 /*
  */
 
