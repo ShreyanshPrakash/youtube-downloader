@@ -7,12 +7,16 @@ export const isValidVideoUrl = (videoUrl: string): boolean => {
   return isValid;
 };
 
-type FileSizeUnit = "KB" | "MB";
-export const getFormatedFileSize = (filesize: number, unit: FileSizeUnit, decimalPlaces: number = 2): number => {
-  if(!filesize){
+type TFileSizeUnit = "KB" | "MB";
+export const getFormatedFileSize = (
+  filesize: number,
+  unit: TFileSizeUnit,
+  decimalPlaces: number = 2
+): number => {
+  if (!filesize) {
     return 0;
   }
   const divisor = FILE_SIZE_UNIT_MULTIPLIER[unit];
-  const result = (filesize/divisor).toFixed(decimalPlaces);
+  const result = (filesize / divisor).toFixed(decimalPlaces);
   return Number(result);
-}
+};

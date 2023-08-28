@@ -20,6 +20,14 @@ interface IProps {
   url: string;
   index: number;
 }
+
+const getDownloadButtonStyles = () => {
+  return {
+    fontSize: "12px",
+    padding: "6px 14px",
+    borderRadius: "14px",
+  }
+}
 export const VideoCard: FC<IProps> = (props: IProps): ReactElement => {
   const { url, index } = props;
 
@@ -81,11 +89,7 @@ export const VideoCard: FC<IProps> = (props: IProps): ReactElement => {
             <Button
               onClick={handleDownloadClick}
               label="Download"
-              styles={{
-                fontSize: "12px",
-                padding: "6px 14px",
-                borderRadius: "14px",
-              }}
+              styles={getDownloadButtonStyles()}
             />
           </div>
         </>
